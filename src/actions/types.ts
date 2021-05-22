@@ -1,0 +1,7 @@
+// ACTION CONSTANTS
+export const DECLARE_HOW_MUCH_DIGITS_TO_DRAW: String =
+   'DECLARE_HOW_MUCH_DIGITS_TO_DRAW';
+export const DRAWN_NEW_DIGITS: String = 'DRAWN_NEW_DIGITS';
+export const USER_PICK_DIGIT: String = 'USER_PICK_DIGIT';
+export const CHANGE_LEVEL: String = 'CHANGE_LEVEL';
+export const CHANGE_USER_SCORE: String = 'CHANGE_USER_SCORE';
