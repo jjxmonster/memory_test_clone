@@ -6,7 +6,10 @@ export interface GameState {
    pickedDigit: Number | null;
    level: Number;
    score: Number;
+   userHealth: HealthNumbers;
 }
+
+type HealthNumbers = 0 | 1 | 2 | 3;
 
 const initialState: GameState = {
    drawnDigits: [],
@@ -14,6 +17,7 @@ const initialState: GameState = {
    howMuchDigitsToDraw: 1,
    level: 1,
    score: 0,
+   userHealth: 3,
 };
 
 const digitsToGame: Array<Number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];

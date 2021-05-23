@@ -1,7 +1,13 @@
 import * as React from 'react';
 
 import { ThemeProvider } from 'styled-components';
-import { GameWrapper } from './components';
+import {
+   GameWrapper,
+   HealthBar,
+   Scoreboard,
+   DigitDisplay,
+   UserKeyboard,
+} from './components';
 
 import { theme } from './theme/theme';
 import { GlobalStyles } from './theme/GlobalStyles';
@@ -11,7 +17,10 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
          <GlobalStyles />
          <GameWrapper>
-            <div>elo</div>
+            <HealthBar />
+            <DigitDisplay />
+            <UserKeyboard />
+            <Scoreboard />
          </GameWrapper>
       </ThemeProvider>
    );
