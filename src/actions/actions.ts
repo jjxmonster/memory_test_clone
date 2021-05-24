@@ -22,6 +22,11 @@ export function changeIsUserCanType(
    return createAction(types.TOOGLE_IS_USER_CAN_TYPE, isUserCan);
 }
 
+export type userRespondedCorrectAction = Action<null>;
+export function userRespondedCorrect(): userRespondedCorrectAction {
+   return createAction(types.USER_RESPONDED_CORRECT, null);
+}
+
 // GAME ACTIONS
 export type startGameAction = Action<null>;
 export function userStartedGame(): startGameAction {

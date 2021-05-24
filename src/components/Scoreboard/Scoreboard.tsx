@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store/store';
 
-import { changeIsUserCanType, userStartedGame } from '../../actions/actions';
+import { userStartedGame } from '../../actions/actions';
 
 import {
    StyledScoreboardWrapper,
@@ -25,7 +25,6 @@ const Scoreboard: React.FC = () => {
 
    const handleStartGame = (): void => {
       dispatch(userStartedGame());
-      // dispatch(changeIsUserCanType(1));
    };
 
    return (

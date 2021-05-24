@@ -5,12 +5,14 @@ export interface GameState {
    digitsToGame: Array<number>;
    howMuchDigitsToDraw: number;
    drawnDigits: Array<number>;
+   isPickedDigitCorrect: boolean | undefined;
 }
 
 const initialState: GameState = {
    digitsToGame: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
    drawnDigits: [],
    howMuchDigitsToDraw: 1,
+   isPickedDigitCorrect: undefined,
 };
 
 type actions = startGameAction;

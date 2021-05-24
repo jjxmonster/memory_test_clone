@@ -21,6 +21,7 @@ const UserKeyboard: React.FC = () => {
    const isUserCanType = useSelector(
       (store: ApplicationState) => store.user.isUserCanType
    );
+
    const dispatch = useDispatch();
 
    const handleKeyClick = (num: number) => {
