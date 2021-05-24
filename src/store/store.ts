@@ -1,16 +1,29 @@
 import { createStore, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { gameReducer } from '../reducers/gameReducer';
+import { rootReducer } from '../reducers/rootReducer';
 import { GameState } from '../reducers/gameReducer';
-import { GameAction } from '../actions/actions';
+import { UserState } from '../reducers/userReducer';
+import {
+   userPickedDigitAction,
+   startGameAction,
+   toogleUserCanTypeAction,
+} from '../actions/actions';
+
+export interface ApplicationState {
+   game: GameState;
+   user: UserState;
+}
+type actions =
+   | userPickedDigitAction
+   | startGameAction
+   | toogleUserCanTypeAction;
 
 export default function configureStore() {
    const composedEnhancers = composeWithDevTools();
-   const store: Store<GameState, GameAction> = createStore(
-      gameReducer,
+   const store: Store<ApplicationState, actions> = createStore(
+      rootReducer,
       composedEnhancers
    );
-
    return store;
 }

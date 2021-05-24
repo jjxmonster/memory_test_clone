@@ -7,7 +7,8 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing:border-box;
   }
   body{
-    overflow: hidden;
+    overflow-y: hidden;
+    font-family: 'Roboto', sans-serif;
   }
   button{
     cursor:pointer;

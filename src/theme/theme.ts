@@ -10,6 +10,9 @@ interface Theme {
          normal: String;
          dark: String;
       };
+      pink: {
+         normal: String;
+      };
    };
 }
 
@@ -24,6 +27,9 @@ export const theme: Theme = {
       purple: {
          normal: '#8b78a4',
          dark: '#4e435b',
+      },
+      pink: {
+         normal: '#d74975',
       },
    },
 };

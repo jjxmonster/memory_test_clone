@@ -1,35 +1,35 @@
-import { GameAction } from '../actions/actions';
+import * as types from '../actions/types';
+import { startGameAction } from '../actions/actions';
 
 export interface GameState {
-   howMuchDigitsToDraw: Number;
-   drawnDigits: Array<Number>;
-   pickedDigit: Number | null;
-   level: Number;
-   score: Number;
-   userHealth: HealthNumbers;
+   digitsToGame: Array<number>;
+   howMuchDigitsToDraw: number;
+   drawnDigits: Array<number>;
 }
 
-type HealthNumbers = 0 | 1 | 2 | 3;
-
 const initialState: GameState = {
+   digitsToGame: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
    drawnDigits: [],
-   pickedDigit: null,
    howMuchDigitsToDraw: 1,
-   level: 1,
-   score: 0,
-   userHealth: 3,
 };
 
-const digitsToGame: Array<Number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+type actions = startGameAction;
 
 export const gameReducer = (
    state: GameState = initialState,
-   action: GameAction
+   action: actions
 ): GameState => {
    const { payload, type } = action;
    switch (type) {
-      // case value:
-      //    break;
+      case types.DRAWN_NEW_DIGITS: {
+         const { digitsToGame, howMuchDigitsToDraw } = state;
+         const newDrawnDigits: Array<number> = [];
+         for (let i = 0; i < howMuchDigitsToDraw; i++) {
+            const randomIndex = Math.floor(Math.random() * digitsToGame.length);
+            newDrawnDigits.push(digitsToGame[randomIndex]);
+         }
+         return { ...state, drawnDigits: newDrawnDigits };
+      }
 
       default:
          return state;
