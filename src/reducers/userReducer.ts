@@ -49,6 +49,20 @@ export const userReducer = (
             userLevel: state.userLevel + 1,
             pickedDigit: undefined,
          };
+      case types.USER_RESPONDED_INCORRECT:
+         return {
+            ...state,
+            numberOfClick: 0,
+            userLevel: state.userLevel - 1,
+            pickedDigit: undefined,
+         };
+      case types.USER_RESPONDED_INCORRECT_ON_1_LEVEL:
+         return {
+            ...state,
+            numberOfClick: 0,
+            userLevel: state.userLevel,
+            pickedDigit: undefined,
+         };
       default:
          return state;
    }

@@ -6,6 +6,7 @@ export interface GameState {
    howMuchDigitsToDraw: number;
    drawnDigits: Array<number>;
    isPickedDigitCorrect: boolean | undefined;
+   isUserRespondedCorrect: boolean | undefined;
 }
 
 const initialState: GameState = {
@@ -13,6 +14,7 @@ const initialState: GameState = {
    drawnDigits: [],
    howMuchDigitsToDraw: 1,
    isPickedDigitCorrect: undefined,
+   isUserRespondedCorrect: undefined,
 };
 
 type actions = startGameAction;
@@ -23,15 +25,44 @@ export const gameReducer = (
 ): GameState => {
    const { payload, type } = action;
    switch (type) {
-      case types.DRAWN_NEW_DIGITS: {
+      case types.GAME_START_CONGIGURATION: {
          const { digitsToGame, howMuchDigitsToDraw } = state;
          const newDrawnDigits: Array<number> = [];
          for (let i = 0; i < howMuchDigitsToDraw; i++) {
             const randomIndex = Math.floor(Math.random() * digitsToGame.length);
             newDrawnDigits.push(digitsToGame[randomIndex]);
          }
-         return { ...state, drawnDigits: newDrawnDigits };
+         return {
+            ...state,
+            drawnDigits: newDrawnDigits,
+            isUserRespondedCorrect: undefined,
+         };
       }
+
+      case types.CONFIGURE_GAME_AFTER_CORRECT_ANSWER:
+         return {
+            ...state,
+            drawnDigits: [],
+            howMuchDigitsToDraw: state.howMuchDigitsToDraw + 1,
+            isPickedDigitCorrect: undefined,
+            isUserRespondedCorrect: true,
+         };
+      case types.CONFIGURE_GAME_AFTER_INCORRECT_ANSWER:
+         return {
+            ...state,
+            drawnDigits: [],
+            howMuchDigitsToDraw: state.howMuchDigitsToDraw - 1,
+            isPickedDigitCorrect: undefined,
+            isUserRespondedCorrect: false,
+         };
+      case types.CONFIGURE_GAME_AFTER_INCORRECT_ANSWER_ON_1_LEVEL:
+         return {
+            ...state,
+            drawnDigits: [],
+            howMuchDigitsToDraw: state.howMuchDigitsToDraw,
+            isPickedDigitCorrect: undefined,
+            isUserRespondedCorrect: false,
+         };
 
       default:
          return state;

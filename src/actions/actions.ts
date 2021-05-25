@@ -9,7 +9,7 @@ export function createAction<T>(type: string, payload: T): Action<T> {
    return { type, payload };
 }
 
-// USER ACTIONS
+///////////////////// USER ACTIONS
 export type userPickedDigitAction = Action<number>;
 export function userPickedDigit(num: number): userPickedDigitAction {
    return createAction(types.USER_PICKED_DIGIT, num);
@@ -27,8 +27,33 @@ export function userRespondedCorrect(): userRespondedCorrectAction {
    return createAction(types.USER_RESPONDED_CORRECT, null);
 }
 
-// GAME ACTIONS
+export type userRespondedInCorrectAction = Action<null>;
+export function userRespondedInCorrect(): userRespondedCorrectAction {
+   return createAction(types.USER_RESPONDED_INCORRECT, null);
+}
+export type userRespondedInCorrectActionOn1LevelAction = Action<null>;
+export function userRespondedInCorrectActionOn1Level(): userRespondedInCorrectActionOn1LevelAction {
+   return createAction(types.USER_RESPONDED_INCORRECT_ON_1_LEVEL, null);
+}
+
+///////////////////// GAME ACTIONS
 export type startGameAction = Action<null>;
 export function userStartedGame(): startGameAction {
-   return createAction(types.DRAWN_NEW_DIGITS, null);
+   return createAction(types.GAME_START_CONGIGURATION, null);
+}
+
+export type configureGameAfterCorrectAnswerAction = Action<null>;
+export function configureGameAfterCorrectAnswer(): configureGameAfterCorrectAnswerAction {
+   return createAction(types.CONFIGURE_GAME_AFTER_CORRECT_ANSWER, null);
+}
+export type configureGameAfterIncorrectAnswerAction = Action<null>;
+export function configureGameAfterIncorrectAnswer(): configureGameAfterIncorrectAnswerAction {
+   return createAction(types.CONFIGURE_GAME_AFTER_INCORRECT_ANSWER, null);
+}
+export type configureGameAfterIncorrectAnswerOn1LevelAction = Action<null>;
+export function configureGameAfterIncorrectAnswerOn1Level(): configureGameAfterIncorrectAnswerOn1LevelAction {
+   return createAction(
+      types.CONFIGURE_GAME_AFTER_INCORRECT_ANSWER_ON_1_LEVEL,
+      null
+   );
 }

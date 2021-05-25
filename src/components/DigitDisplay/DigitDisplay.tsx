@@ -9,10 +9,8 @@ import {
    StyledNumberOfDigits,
    StyledDigitContainer,
 } from './DigitDisplay.css';
-
-// export interface DigitDisplayProps {
-
-// }
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const DigitDisplay: React.FC = () => {
    const dispatch = useDispatch();
@@ -21,6 +19,9 @@ const DigitDisplay: React.FC = () => {
    );
    const howMuchDigitsToDraw = useSelector(
       (store: ApplicationState) => store.game.howMuchDigitsToDraw
+   );
+   const isUserRespondedCorrect = useSelector(
+      (store: ApplicationState) => store.game.isUserRespondedCorrect
    );
    const digitPlaceToDisplay = React.useRef<HTMLSpanElement>(null);
 
@@ -40,13 +41,31 @@ const DigitDisplay: React.FC = () => {
       }, drawnDigits.length * 1000);
    }
 
+   const DisplaySwitch = () => {
+      switch (isUserRespondedCorrect) {
+         case true:
+            return (
+               <FontAwesomeIcon
+                  icon={faCheck}
+                  className='display-icon-correct'
+               />
+            );
+         case false:
+            return (
+               <FontAwesomeIcon icon={faTimes} className='display-icon-wrong' />
+            );
+         default:
+            return <span ref={digitPlaceToDisplay}></span>;
+      }
+   };
+
    return (
       <DigitDisplayWrapper>
          <StyledNumberOfDigits>
             {howMuchDigitsToDraw} Digits
          </StyledNumberOfDigits>
          <StyledDigitContainer>
-            <span ref={digitPlaceToDisplay}></span>
+            <DisplaySwitch />
          </StyledDigitContainer>
       </DigitDisplayWrapper>
    );

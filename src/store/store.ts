@@ -6,8 +6,14 @@ import { GameState } from '../reducers/gameReducer';
 import { UserState } from '../reducers/userReducer';
 import {
    userPickedDigitAction,
-   startGameAction,
    toogleUserCanTypeAction,
+   userRespondedCorrectAction,
+   userRespondedInCorrectAction,
+   userRespondedInCorrectActionOn1LevelAction,
+   startGameAction,
+   configureGameAfterCorrectAnswerAction,
+   configureGameAfterIncorrectAnswerAction,
+   configureGameAfterIncorrectAnswerOn1LevelAction,
 } from '../actions/actions';
 import { gameMiddleware } from '../middlewares/gameMiddleware';
 
@@ -17,8 +23,14 @@ export interface ApplicationState {
 }
 type actions =
    | userPickedDigitAction
+   | toogleUserCanTypeAction
+   | userRespondedCorrectAction
+   | userRespondedInCorrectAction
    | startGameAction
-   | toogleUserCanTypeAction;
+   | configureGameAfterCorrectAnswerAction
+   | configureGameAfterIncorrectAnswerAction
+   | configureGameAfterIncorrectAnswerOn1LevelAction
+   | userRespondedInCorrectActionOn1LevelAction;
 
 type DispatchType = (args: actions) => actions;
 

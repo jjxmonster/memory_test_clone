@@ -28,4 +28,12 @@ export const StyledDigitContainer = styled.div`
       font-size: 15em;
       color: ${({ theme }) => theme.colors.green.normal};
    }
+   > .display-icon-correct {
+      font-size: 15em;
+      color: ${({ theme }) => theme.colors.green.normal};
+   }
+   > .display-icon-wrong {
+      font-size: 15em;
+      color: red;
+   }
 `;

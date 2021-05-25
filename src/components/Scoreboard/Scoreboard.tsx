@@ -37,7 +37,9 @@ const Scoreboard: React.FC = () => {
             <h3>SCORE</h3>
             <span>{userScore}</span>
          </StyledCircleWrapper>
-         <StyledStartButton onClick={handleStartGame}>PLAY</StyledStartButton>
+         <StyledStartButton onClick={handleStartGame}>
+            PLAY LEVEL
+         </StyledStartButton>
       </StyledScoreboardWrapper>
    );
 };

@@ -31,4 +31,7 @@ export const StyledStartButton = styled.button`
    height: 80px;
    background: ${({ theme }) => theme.colors.green.normal};
    border-radius: 60px;
+   color: white;
+   font-size: 2vh;
+   font-weight: 500;
 `;
