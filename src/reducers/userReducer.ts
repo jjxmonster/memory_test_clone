@@ -9,12 +9,10 @@ export interface UserState {
    pickedDigit: number | undefined;
    userLevel: number;
    userScore: number;
-   userHealth: HealthNumbers;
+   userHealth: number;
    isUserCanType: boolean;
    numberOfClick: number;
 }
-
-type HealthNumbers = 0 | 1 | 2 | 3;
 
 const initialState: UserState = {
    pickedDigit: undefined,
@@ -55,6 +53,7 @@ export const userReducer = (
             numberOfClick: 0,
             userLevel: state.userLevel - 1,
             pickedDigit: undefined,
+            userHealth: state.userHealth - 1,
          };
       case types.USER_RESPONDED_INCORRECT_ON_1_LEVEL:
          return {
@@ -62,6 +61,16 @@ export const userReducer = (
             numberOfClick: 0,
             userLevel: state.userLevel,
             pickedDigit: undefined,
+            userHealth: state.userHealth - 1,
+         };
+      case types.USER_LOST_GAME:
+         return {
+            pickedDigit: undefined,
+            userLevel: 1,
+            userScore: 0,
+            userHealth: 3,
+            isUserCanType: false,
+            numberOfClick: 0,
          };
       default:
          return state;

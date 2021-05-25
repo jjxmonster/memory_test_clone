@@ -63,6 +63,14 @@ export const gameReducer = (
             isPickedDigitCorrect: undefined,
             isUserRespondedCorrect: false,
          };
+      case types.GAME_OVER:
+         return {
+            ...state,
+            drawnDigits: [],
+            howMuchDigitsToDraw: 1,
+            isPickedDigitCorrect: undefined,
+            isUserRespondedCorrect: false,
+         };
 
       default:
          return state;

@@ -29,7 +29,9 @@ export const StyledKeyboardKey = styled.button`
    font-size: 3.5vh;
    ${({ disabled, theme }) =>
       disabled
-         ? 'opacity:0.6;'
+         ? `opacity:0.6;
+            cursor:not-allowed;
+         `
          : `opacity:1; 
          &:hover  {
       color: ${theme.colors.purple.normal};

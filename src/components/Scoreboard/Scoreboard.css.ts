@@ -34,4 +34,13 @@ export const StyledStartButton = styled.button`
    color: white;
    font-size: 2vh;
    font-weight: 500;
+   ${({ disabled }) =>
+      disabled
+         ? `
+         opacity:0.5;
+         cursor:not-allowed;
+      `
+         : `
+         opacity:1;
+      `}
 `;

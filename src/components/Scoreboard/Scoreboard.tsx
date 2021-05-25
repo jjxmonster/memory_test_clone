@@ -10,16 +10,15 @@ import {
    StyledStartButton,
 } from './Scoreboard.css';
 
-// export interface ScoreboardProps {
-
-// }
-
 const Scoreboard: React.FC = () => {
    const userLevel = useSelector(
       (store: ApplicationState) => store.user.userLevel
    );
    const userScore = useSelector(
       (store: ApplicationState) => store.user.userScore
+   );
+   const isStartButtonActive = useSelector(
+      (store: ApplicationState) => store.user.isUserCanType
    );
    const dispatch = useDispatch();
 
@@ -37,7 +36,10 @@ const Scoreboard: React.FC = () => {
             <h3>SCORE</h3>
             <span>{userScore}</span>
          </StyledCircleWrapper>
-         <StyledStartButton onClick={handleStartGame}>
+         <StyledStartButton
+            disabled={isStartButtonActive}
+            onClick={handleStartGame}
+         >
             PLAY LEVEL
          </StyledStartButton>
       </StyledScoreboardWrapper>

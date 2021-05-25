@@ -10,10 +10,6 @@ import {
    StyledKeyboardKey,
 } from './UserKeyboard.css';
 
-// export interface UserKeyboardProps {
-
-// }
-
 const UserKeyboard: React.FC = () => {
    const digitsToGame = useSelector(
       (store: ApplicationState) => store.game.digitsToGame

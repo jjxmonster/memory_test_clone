@@ -4,8 +4,10 @@ import {
    configureGameAfterCorrectAnswer,
    configureGameAfterIncorrectAnswer,
    configureGameAfterIncorrectAnswerOn1Level,
+   gameOver,
+   userLostGame,
    userRespondedCorrect,
-   userRespondedInCorrect,
+   userRespondedIncorrect,
    userRespondedInCorrectActionOn1Level,
 } from '../actions/actions';
 import { USER_PICKED_DIGIT } from '../actions/types';
@@ -17,6 +19,7 @@ export const gameMiddleware: Middleware<{}, ApplicationState> =
       const state = store.getState();
       const { type, payload } = action;
       const { game, user } = state;
+
       if (type === USER_PICKED_DIGIT) {
          if (game.drawnDigits[user.numberOfClick] === payload) {
             if (user.numberOfClick + 1 === game.drawnDigits.length) {
@@ -27,14 +30,20 @@ export const gameMiddleware: Middleware<{}, ApplicationState> =
                return next(action);
             }
          } else {
-            if (user.userLevel === 1) {
+            if (user.userLevel === 1 && user.userHealth !== 1) {
                store.dispatch(changeIsUserCanType(0));
                store.dispatch(userRespondedInCorrectActionOn1Level());
                store.dispatch(configureGameAfterIncorrectAnswerOn1Level());
             } else {
-               store.dispatch(changeIsUserCanType(0));
-               store.dispatch(configureGameAfterIncorrectAnswer());
-               store.dispatch(userRespondedInCorrect());
+               if (user.userHealth === 1) {
+                  store.dispatch(changeIsUserCanType(0));
+                  store.dispatch(gameOver());
+                  store.dispatch(userLostGame());
+               } else {
+                  store.dispatch(changeIsUserCanType(0));
+                  store.dispatch(configureGameAfterIncorrectAnswer());
+                  store.dispatch(userRespondedIncorrect());
+               }
             }
          }
       } else {
