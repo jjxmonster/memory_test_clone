@@ -35,9 +35,13 @@ export type userRespondedInCorrectActionOn1LevelAction = Action<null>;
 export function userRespondedInCorrectActionOn1Level(): userRespondedInCorrectActionOn1LevelAction {
    return createAction(types.USER_RESPONDED_INCORRECT_ON_1_LEVEL, null);
 }
-export type UserLostGameAction = Action<null>;
-export function userLostGame(): UserLostGameAction {
+export type userLostGameAction = Action<null>;
+export function userLostGame(): userLostGameAction {
    return createAction(types.USER_LOST_GAME, null);
+}
+export type resetUserStatsAction = Action<null>;
+export function resetUserStats(): resetUserStatsAction {
+   return createAction(types.RESET_USER_STATS, null);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////// GAME ACTIONS

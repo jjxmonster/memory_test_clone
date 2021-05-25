@@ -7,6 +7,7 @@ export interface GameState {
    drawnDigits: Array<number>;
    isPickedDigitCorrect: boolean | undefined;
    isUserRespondedCorrect: boolean | undefined;
+   isGameOver: boolean;
 }
 
 const initialState: GameState = {
@@ -15,6 +16,7 @@ const initialState: GameState = {
    howMuchDigitsToDraw: 1,
    isPickedDigitCorrect: undefined,
    isUserRespondedCorrect: undefined,
+   isGameOver: false,
 };
 
 type actions = startGameAction;
@@ -69,7 +71,8 @@ export const gameReducer = (
             drawnDigits: [],
             howMuchDigitsToDraw: 1,
             isPickedDigitCorrect: undefined,
-            isUserRespondedCorrect: false,
+            isUserRespondedCorrect: undefined,
+            isGameOver: true,
          };
 
       default:

@@ -1,34 +1,45 @@
 import * as React from 'react';
-import { Store } from 'redux';
-import { Provider } from 'react-redux';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-
-import configureStore from './store/store';
-
 import {
    GameWrapper,
    HealthBar,
    Scoreboard,
    DigitDisplay,
    UserKeyboard,
+   FinalScoreModal,
 } from './components';
 import { theme } from './theme/theme';
 import { GlobalStyles } from './theme/GlobalStyles';
-
-const store = configureStore();
+import { useSelector } from 'react-redux';
+import { ApplicationState } from './store/store';
 
 const App: React.FC = () => {
+   const isGameOver = useSelector(
+      (store: ApplicationState) => store.game.isGameOver
+   );
+   const history = useHistory();
+   React.useEffect(() => {
+      if (isGameOver) {
+         history.push('/final-score');
+      }
+   }, [isGameOver]);
    return (
       <ThemeProvider theme={theme}>
          <GlobalStyles />
-         <Provider store={store}>
-            <GameWrapper>
-               <HealthBar />
-               <DigitDisplay />
-               <UserKeyboard />
-               <Scoreboard />
-            </GameWrapper>
-         </Provider>
+         <Switch>
+            <Route path='/'>
+               <GameWrapper>
+                  <HealthBar />
+                  <DigitDisplay />
+                  <UserKeyboard />
+                  <Scoreboard />
+                  <Route path='/final-score'>
+                     <FinalScoreModal />
+                  </Route>
+               </GameWrapper>
+            </Route>
+         </Switch>
       </ThemeProvider>
    );
 };

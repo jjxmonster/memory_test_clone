@@ -65,12 +65,17 @@ export const userReducer = (
          };
       case types.USER_LOST_GAME:
          return {
+            ...state,
             pickedDigit: undefined,
-            userLevel: 1,
-            userScore: 0,
             userHealth: 3,
             isUserCanType: false,
             numberOfClick: 0,
+         };
+      case types.RESET_USER_STATS:
+         return {
+            ...state,
+            userLevel: 1,
+            userScore: 0,
          };
       default:
          return state;

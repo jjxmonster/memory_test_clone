@@ -16,4 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     background:transparent;
     outline:none;
   }
+  ul{
+    list-style:none;
+  }
 `;
