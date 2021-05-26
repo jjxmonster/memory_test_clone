@@ -19,10 +19,16 @@ const App: React.FC = () => {
    const isGameOver = useSelector(
       (store: ApplicationState) => store.game.isGameOver
    );
+   const isUserLogged = useSelector(
+      (store: ApplicationState) => store.user.isUserLogged
+   );
    const history = useHistory();
    React.useEffect(() => {
       if (isGameOver) {
          history.push('/final-score');
+      }
+      if (!isUserLogged) {
+         history.push('/login');
       }
    }, [isGameOver]);
    return (

@@ -15,6 +15,12 @@ export const StyledContainerLogin = styled.div`
    display: flex;
    border-radius: 30px;
    overflow: hidden;
+   //MOBILE
+   @media (max-width: 1000px) {
+      flex-direction: column;
+      width: 85vw;
+      height: 85vh;
+   }
 `;
 
 export const StyledLeftSite = styled.div`
@@ -25,6 +31,11 @@ export const StyledLeftSite = styled.div`
    flex-direction: column;
    justify-content: center;
    padding: 15% 8%;
+   //MOBILE
+   @media (max-width: 1000px) {
+      width: 100%;
+      height: 50%;
+   }
 `;
 export const StyledTitleWrapper = styled.div`
    flex: 1;
@@ -77,5 +88,11 @@ export const StyledRightSite = styled.div`
          width: 30%;
          border-bottom: 3px solid ${({ theme }) => theme.colors.purple.dark};
       }
+   }
+
+   //MOBILE
+   @media (max-width: 1000px) {
+      width: 100%;
+      height: 50%;
    }
 `;

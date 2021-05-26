@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { GoogleLogin } from 'react-google-login';
 
+import { addUser } from '../../fetch/userFetch';
+
 import {
    StyledLoginPageWrapper,
    StyledContainerLogin,
@@ -12,11 +14,12 @@ import {
 
 const LoginPage: React.SFC = () => {
    const onSuccess = (res: object) => {
-      console.log('zalogowano', res);
+      addUser({ data: res });
    };
    const onFailure = () => {
       console.log('błąd');
    };
+
    return (
       <StyledLoginPageWrapper>
          <StyledContainerLogin>
@@ -36,9 +39,7 @@ const LoginPage: React.SFC = () => {
             <StyledRightSite>
                <h1>Sign in</h1>
                <GoogleLogin
-                  clientId={
-                     '85067498020-f5lggb9qogo3sbb70dnmmkavhjsvd8va.apps.googleusercontent.com'
-                  }
+                  clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_KEY}.apps.googleusercontent.com`}
                   buttonText='Login with Google'
                   onSuccess={onSuccess}
                   onFailure={onFailure}

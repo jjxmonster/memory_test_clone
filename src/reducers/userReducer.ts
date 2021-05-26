@@ -12,6 +12,7 @@ export interface UserState {
    userHealth: number;
    isUserCanType: boolean;
    numberOfClick: number;
+   isUserLogged: boolean;
 }
 
 const initialState: UserState = {
@@ -21,6 +22,7 @@ const initialState: UserState = {
    userHealth: 3,
    isUserCanType: false,
    numberOfClick: 0,
+   isUserLogged: false,
 };
 
 type actions = userPickedDigitAction | toogleUserCanTypeAction;
