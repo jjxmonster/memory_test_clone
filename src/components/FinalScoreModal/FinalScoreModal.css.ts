@@ -4,7 +4,7 @@ export const StyledModalWrapper = styled.div`
    position: fixed;
    top: 0;
    margin: auto;
-   background: rgba(0, 0, 0, 0.5);
+   background: rgba(0, 0, 0, 0.7);
    width: 100vw;
    height: 100vh;
    display: flex;
@@ -20,7 +20,6 @@ export const StyledModalTitle = styled.h1`
 export const StyledUserStatsContainer = styled.div`
    width: 30vw;
    height: 30vh;
-   //    border: 1px solid ${({ theme }) => theme.colors.pink.normal};
    display: flex;
    flex-direction: column;
    align-items: center;

@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   body{
     overflow-y: hidden;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'PT Sans', sans-serif;
   }
   button{
     cursor:pointer;

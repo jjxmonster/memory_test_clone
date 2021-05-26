@@ -67,8 +67,8 @@ export const userReducer = (
          return {
             ...state,
             pickedDigit: undefined,
-            userHealth: 3,
             isUserCanType: false,
+            userHealth: 3,
             numberOfClick: 0,
          };
       case types.RESET_USER_STATS:

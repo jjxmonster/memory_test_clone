@@ -25,7 +25,7 @@ export const gameReducer = (
    state: GameState = initialState,
    action: actions
 ): GameState => {
-   const { payload, type } = action;
+   const { type } = action;
    switch (type) {
       case types.GAME_START_CONGIGURATION: {
          const { digitsToGame, howMuchDigitsToDraw } = state;
@@ -37,6 +37,7 @@ export const gameReducer = (
          return {
             ...state,
             drawnDigits: newDrawnDigits,
+            isGameOver: false,
             isUserRespondedCorrect: undefined,
          };
       }

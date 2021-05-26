@@ -8,6 +8,7 @@ import {
    DigitDisplay,
    UserKeyboard,
    FinalScoreModal,
+   LoginPage,
 } from './components';
 import { theme } from './theme/theme';
 import { GlobalStyles } from './theme/GlobalStyles';
@@ -28,6 +29,9 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
          <GlobalStyles />
          <Switch>
+            <Route path='/login'>
+               <LoginPage />
+            </Route>
             <Route path='/'>
                <GameWrapper>
                   <HealthBar />

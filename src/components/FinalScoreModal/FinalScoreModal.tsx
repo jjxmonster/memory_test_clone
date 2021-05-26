@@ -15,7 +15,6 @@ import {
 } from './FinalScoreModal.css';
 
 const FinalScoreModal: React.FC = () => {
-   const modalRoot = document.getElementById('modal') as HTMLElement;
    const userScore = useSelector(
       (store: ApplicationState) => store.user.userScore
    );
@@ -30,7 +29,7 @@ const FinalScoreModal: React.FC = () => {
       dispatch(resetUserStats());
    };
 
-   return ReactDOM.createPortal(
+   const modalContent = (
       <StyledModalWrapper>
          <StyledModalTitle>GAME OVER</StyledModalTitle>
          <StyledUserStatsContainer>
@@ -48,9 +47,10 @@ const FinalScoreModal: React.FC = () => {
                TRY AGAIN
             </StyledTryAgainButton>
          </StyledUserStatsContainer>
-      </StyledModalWrapper>,
-      modalRoot
+      </StyledModalWrapper>
    );
+   const modalRoot = document.getElementById('modal') as HTMLElement;
+   return ReactDOM.createPortal(modalContent, modalRoot);
 };
 
 export default FinalScoreModal;

@@ -8,6 +8,14 @@ export const DigitDisplayWrapper = styled.section`
    display: flex;
    flex-direction: column;
    padding: 5% 35% 0 35%;
+   //MOBILE
+   @media (max-width: 1000px) {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+      padding: 5% 15% 0 15%;
+   }
 `;
 
 export const StyledNumberOfDigits = styled.h2`
@@ -25,15 +33,25 @@ export const StyledDigitContainer = styled.div`
    align-items: center;
    justify-content: center;
    > span {
-      font-size: 15em;
+      font-size: 13vw;
       color: ${({ theme }) => theme.colors.green.normal};
+      //MOBILE
+      @media (max-width: 1000px) {
+         font-size: 50vw;
+      }
    }
    > .display-icon-correct {
       font-size: 15em;
       color: ${({ theme }) => theme.colors.green.normal};
+      @media (max-width: 1000px) {
+         font-size: 50vw;
+      }
    }
    > .display-icon-wrong {
       font-size: 15em;
       color: red;
+      @media (max-width: 1000px) {
+         font-size: 50vw;
+      }
    }
 `;
