@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledHealthBarWrapper = styled.nav`
-   grid-column-start: 1;
-   grid-column-end: 2;
-   grid-row-start: 1;
-   grid-row-end: 2;
+export const StyledHealthBarWrapper = styled.div`
+   flex: 1;
    display: flex;
    align-items: center;
    padding-left: 5%;

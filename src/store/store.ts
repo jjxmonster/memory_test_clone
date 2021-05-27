@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from '../reducers/rootReducer';
 import { GameState } from '../reducers/gameReducer';
 import { UserState } from '../reducers/userReducer';
+import { UserLoginState } from '../reducers/userLoginReducer';
 import {
    userPickedDigitAction,
    toogleUserCanTypeAction,
@@ -14,12 +15,14 @@ import {
    configureGameAfterCorrectAnswerAction,
    configureGameAfterIncorrectAnswerAction,
    configureGameAfterIncorrectAnswerOn1LevelAction,
+   userLoggedAction,
 } from '../actions/actions';
 import { gameMiddleware } from '../middlewares/gameMiddleware';
 
 export interface ApplicationState {
    game: GameState;
    user: UserState;
+   userLogin: UserLoginState;
 }
 type actions =
    | userPickedDigitAction
@@ -30,7 +33,8 @@ type actions =
    | configureGameAfterCorrectAnswerAction
    | configureGameAfterIncorrectAnswerAction
    | configureGameAfterIncorrectAnswerOn1LevelAction
-   | userRespondedInCorrectActionOn1LevelAction;
+   | userRespondedInCorrectActionOn1LevelAction
+   | userLoggedAction;
 
 type DispatchType = (args: actions) => actions;
 

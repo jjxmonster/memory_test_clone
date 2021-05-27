@@ -5,3 +5,5 @@ export { default as DigitDisplay } from './DigitDisplay';
 export { default as UserKeyboard } from './UserKeyboard';
 export { default as FinalScoreModal } from './FinalScoreModal';
 export { default as LoginPage } from './LoginPage';
+export { default as BarComponent } from './BarComponent';
+export { default as UserBar } from './UserBar';

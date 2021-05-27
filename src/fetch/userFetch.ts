@@ -1,4 +1,4 @@
-export const addUser = async (data: object): Promise<Response> => {
+export const addUser = async (data: object) => {
    const response = await fetch('http://localhost:3030/add-user', {
       method: 'POST',
       headers: {
@@ -6,6 +6,7 @@ export const addUser = async (data: object): Promise<Response> => {
       },
       body: JSON.stringify(data),
    });
+   const user = await response.json();
 
-   return response;
+   return user.user;
 };

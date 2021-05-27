@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const cookie_session_1 = __importDefault(require("cookie-session"));
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongodb_1 = __importDefault(require("mongodb"));
@@ -14,6 +15,11 @@ const port = process.env.PORT || 3030;
 const client = new mongodb_1.default.MongoClient(dbUrl);
 app.use(cors_1.default());
 app.use(express_1.default.json());
+app.use(cookie_session_1.default({
+    name: 'session',
+    keys: ['1234'],
+    maxAge: 24 * 60 * 60 * 1000,
+}));
 client.connect(err => {
     if (err) {
         console.log('error');
@@ -23,7 +29,7 @@ client.connect(err => {
         const db = client.db('memory-test-users');
         const users = db.collection('users');
         app.post('/add-user', (req, res) => {
-            const { googleId } = req.body.data.profileObj;
+            const { googleId, name } = req.body.data.profileObj;
             users.findOne({ googleId }, (error, data) => {
                 if (error) {
                     console.log('error');
@@ -32,16 +38,18 @@ client.connect(err => {
                     if (data === null) {
                         const newUser = {
                             googleId,
+                            name,
                             games: {},
                         };
-                        users.insertOne(newUser);
+                        users.insertOne(newUser, () => {
+                            res.send({ user: newUser });
+                        });
                     }
                     else {
-                        console.log('already exist');
+                        res.send({ user: data });
                     }
                 }
             });
-            res.end(200);
         });
     }
 });

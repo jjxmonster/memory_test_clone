@@ -3,7 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import {
    GameWrapper,
-   HealthBar,
+   BarComponent,
    Scoreboard,
    DigitDisplay,
    UserKeyboard,
@@ -20,17 +20,15 @@ const App: React.FC = () => {
       (store: ApplicationState) => store.game.isGameOver
    );
    const isUserLogged = useSelector(
-      (store: ApplicationState) => store.user.isUserLogged
+      (store: ApplicationState) => store.userLogin.isUserLogged
    );
    const history = useHistory();
    React.useEffect(() => {
       if (isGameOver) {
          history.push('/final-score');
       }
-      if (!isUserLogged) {
-         history.push('/login');
-      }
-   }, [isGameOver]);
+      isUserLogged ? history.push('/') : history.push('/login');
+   }, [isGameOver, isUserLogged]);
    return (
       <ThemeProvider theme={theme}>
          <GlobalStyles />
@@ -40,7 +38,7 @@ const App: React.FC = () => {
             </Route>
             <Route path='/'>
                <GameWrapper>
-                  <HealthBar />
+                  <BarComponent />
                   <DigitDisplay />
                   <UserKeyboard />
                   <Scoreboard />

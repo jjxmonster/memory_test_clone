@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 
+import { userLogged } from '../../actions/actions';
 import { addUser } from '../../fetch/userFetch';
 
 import {
@@ -12,12 +14,18 @@ import {
    StyledDescriptionWrapper,
 } from './LoginPage.css';
 
-const LoginPage: React.SFC = () => {
-   const onSuccess = (res: object) => {
-      addUser({ data: res });
+const LoginPage: React.FC = () => {
+   const dispatch = useDispatch();
+
+   const onSuccess = async (res: object) => {
+      await addUser({ data: res }).then(res => {
+         if (res.googleId) {
+            dispatch(userLogged(res));
+         }
+      });
    };
    const onFailure = () => {
-      console.log('błąd');
+      alert('Something went wrong!');
    };
 
    return (
