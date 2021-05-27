@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 
 import { userLogged } from '../../actions/actions';
-import { addUser } from '../../fetch/userFetch';
+import { loginUser } from '../../fetch/userFetch';
 
 import {
    StyledLoginPageWrapper,
@@ -18,7 +18,7 @@ const LoginPage: React.FC = () => {
    const dispatch = useDispatch();
 
    const onSuccess = async (res: object) => {
-      await addUser({ data: res }).then(res => {
+      await loginUser({ data: res }).then(res => {
          if (res.googleId) {
             dispatch(userLogged(res));
          }

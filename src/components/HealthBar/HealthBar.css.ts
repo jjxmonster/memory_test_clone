@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledHealthBarWrapper = styled.div`
-   flex: 1;
+   height: 100%;
+   width: 45%;
    display: flex;
    align-items: center;
-   padding-left: 5%;
    > h2 {
       color: white;
       font-size: 2vh;

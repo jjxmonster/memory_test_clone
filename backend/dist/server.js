@@ -1,10 +1,28 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const cookie_session_1 = __importDefault(require("cookie-session"));
-const express_1 = __importDefault(require("express"));
+const express_1 = __importStar(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongodb_1 = __importDefault(require("mongodb"));
 const cors_1 = __importDefault(require("cors"));
@@ -14,12 +32,7 @@ const dbUrl = process.env.MONGODB_URL;
 const port = process.env.PORT || 3030;
 const client = new mongodb_1.default.MongoClient(dbUrl);
 app.use(cors_1.default());
-app.use(express_1.default.json());
-app.use(cookie_session_1.default({
-    name: 'session',
-    keys: ['1234'],
-    maxAge: 24 * 60 * 60 * 1000,
-}));
+app.use(express_1.json());
 client.connect(err => {
     if (err) {
         console.log('error');
@@ -39,7 +52,7 @@ client.connect(err => {
                         const newUser = {
                             googleId,
                             name,
-                            games: {},
+                            games: [],
                         };
                         users.insertOne(newUser, () => {
                             res.send({ user: newUser });
@@ -50,6 +63,39 @@ client.connect(err => {
                     }
                 }
             });
+        });
+        app.post('/add-score', (req, res) => {
+            const { game, userId } = req.body;
+            users.findOne({ googleId: userId }, (error, data) => {
+                if (error) {
+                    console.log('error');
+                }
+                else {
+                    if (data !== null) {
+                        const { games } = data;
+                        const newGamesArray = [...games, game];
+                        users.updateOne({ googleId: userId }, { $set: { games: newGamesArray } });
+                    }
+                    else
+                        res.end();
+                }
+            });
+        });
+        app.get('/get-games/:id', (req, res) => {
+            const { id } = req.params;
+            if (id === undefined) {
+                res.end('undefined');
+            }
+            else {
+                users.findOne({ googleId: id }, (error, data) => {
+                    if (error) {
+                        console.log('error');
+                    }
+                    else {
+                        res.send(data.games);
+                    }
+                });
+            }
         });
     }
 });

@@ -7,3 +7,4 @@ export { default as FinalScoreModal } from './FinalScoreModal';
 export { default as LoginPage } from './LoginPage';
 export { default as BarComponent } from './BarComponent';
 export { default as UserBar } from './UserBar';
+export { default as ScoresHistory } from './ScoresHistory';

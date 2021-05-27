@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { ApplicationState } from '../../store/store';
 
+import { addGame } from '../../fetch/userFetch';
 import { resetUserStats } from '../../actions/actions';
 
 import {
@@ -21,6 +22,9 @@ const FinalScoreModal: React.FC = () => {
    const userLevel = useSelector(
       (store: ApplicationState) => store.user.userLevel
    );
+   const userId = useSelector(
+      (store: ApplicationState) => store.userLogin.user?.googleId
+   );
    const history = useHistory();
    const dispatch = useDispatch();
 
@@ -28,6 +32,20 @@ const FinalScoreModal: React.FC = () => {
       history.goBack();
       dispatch(resetUserStats());
    };
+
+   const addScoreToDB = async () => {
+      const gameObject = {
+         level: userLevel,
+         score: userScore,
+         date: Date.now(),
+      };
+
+      await addGame(gameObject, userId);
+   };
+
+   React.useEffect(() => {
+      addScoreToDB();
+   }, [userScore, userLevel]);
 
    const modalContent = (
       <StyledModalWrapper>
